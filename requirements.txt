@@ -1,0 +1,6 @@
+pytest
+pytest-testdox
+pytest-cov
+pytest-watch
+flake8
+black
