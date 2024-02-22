@@ -21,4 +21,4 @@ jobs:
           flake8 ./app
       - name: Test with pytest
         run: |
-          pytest
+          pytest --no-cov
