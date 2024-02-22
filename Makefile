@@ -13,9 +13,9 @@ format: build
 	docker run myapp black ./app
 
 test: build
-	docker run myapp pytest
+	docker run myapp pytest -c tox.ini
 
 coverage: build
-	docker run myapp pytest --cov=./app
+	docker run myapp pytest -c tox.ini --cov=./app
 
 before_commit: lint test
