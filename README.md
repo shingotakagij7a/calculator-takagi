@@ -1,2 +1,70 @@
-# calculator-takagi
-This application is developed to submit for the coding interview problem.
+# calculator
+
+このアプリケーションは、コーディング面接の課題のために開発されました。基本的な算術演算を行い、コマンドラインインターフェースを介してユーザーの入力に応じて計算結果を表示します。
+
+## セットアップ
+
+プロジェクトをローカルで実行するためには、以下の手順に従ってください。
+
+プロジェクトのクローンを作成します。
+
+```:bash
+git clone https://github.com/your-username/calculator-takagi.git
+cd calculator-takagi
+```
+
+Docker イメージをビルドします。
+
+```:bash
+make build
+```
+
+## 使用方法
+
+### アプリケーションの実行
+
+アプリケーションを実行するには、以下のコマンドを使用します。
+
+```:bash
+make run
+```
+
+### コードの静的解析（Lint）
+
+コードの静的解析を行うには、以下のコマンドを使用します。
+
+```:bash
+make lint
+```
+
+### コードのフォーマット
+
+コードのフォーマットを行うには、以下のコマンドを使用します。
+
+```:bash
+make format
+```
+
+### テストの実行
+
+テストを実行するには、以下のコマンドを使用します。
+
+```:bash
+make test
+```
+
+### カバレッジレポートの生成
+
+テストカバレッジレポートを生成するには、以下のコマンドを使用します。
+
+```:bash
+make coverage
+```
+
+### コミット前のチェック
+
+コミット前にリントとテストを行うには、以下のコマンドを使用します。
+
+```:bash
+make before_commit
+```
