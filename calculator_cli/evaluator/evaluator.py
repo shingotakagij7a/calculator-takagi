@@ -9,6 +9,8 @@ class Evaluator:
     FIRST_OPERAND_INDEX = 0
     OPERATOR_INDEX = 1
     SECOND_OPERAND_INDEX = 2
+    OUTPUT_MAX_VALUE = 1_000_000_000
+    OUTPUT_MIN_VALUE = -1_000_000_000
 
     def __init__(self):
         self.operator = Operator()
@@ -17,6 +19,8 @@ class Evaluator:
     def execute(self, expression):
         parsed_expression = self.parser.execute(expression)
         result = self._evaluate_parsed_expression(parsed_expression)
+        if result > self.OUTPUT_MAX_VALUE or result < self.OUTPUT_MIN_VALUE:
+            raise ValueError("Value out of allowed range")
         if isinstance(result, Fraction):
             return float(result)
         return result

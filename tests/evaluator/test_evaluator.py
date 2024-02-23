@@ -40,3 +40,16 @@ class TestEvaluator:
             evaluator = Evaluator()
             with pytest.raises(expected_exception, match=expected_message):
                 evaluator.execute(input)
+
+    class Test異常系_算術結果の出力が不適切:
+        @pytest.mark.parametrize(
+            ["input", "expected_exception", "expected_message"],
+            [
+                pytest.param("2 + 999999999", ValueError, "Value out of allowed range", id="large number"),
+                pytest.param("-2 - 999999999", ValueError, "Value out of allowed range", id="small number"),
+            ]
+        )
+        def test_文字列の算術演算式の入力が不適切な場合に例外を送出する(self, input, expected_exception, expected_message):
+            evaluator = Evaluator()
+            with pytest.raises(expected_exception, match=expected_message):
+                evaluator.execute(input)

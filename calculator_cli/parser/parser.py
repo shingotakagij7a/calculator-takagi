@@ -8,8 +8,8 @@ from pyparsing.results import ParseResults
 class Parser:
     VALID_OPERATORS = ['+', '-', '*', '/']
     INVALID_OPERATORS = ['>', '<', '>=', '<=', '==', '!=', '**', '//', '%', '&', '|', '^', '<<', '>>', 'and', 'or', 'not']
-    MAX_VALUE = 1_000_000_000
-    MIN_VALUE = -1_000_000_000
+    INPUT_MAX_VALUE = 1_000_000_000
+    INPUT_MIN_VALUE = -1_000_000_000
 
     def __init__(self):
         rational_number = Combine(Optional(oneOf("+ -")) + Regex(r'\d+\.\d*|\.\d+')).setParseAction(lambda t: Fraction(t[0]))
@@ -39,7 +39,7 @@ class Parser:
     def _check_input_value_range(self, parsed_expression):
         for token in parsed_expression:
             if isinstance(token, (int, Fraction)):
-                if token > self.MAX_VALUE or token < self.MIN_VALUE:
+                if token > self.INPUT_MAX_VALUE or token < self.INPUT_MIN_VALUE:
                     raise ValueError("Value out of allowed range")
             elif isinstance(token, ParseResults):
                 self._check_input_value_range(token)
