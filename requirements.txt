@@ -2,5 +2,6 @@ pytest
 pytest-testdox
 pytest-cov
 pytest-watch
+pyparsing
 flake8
 black
