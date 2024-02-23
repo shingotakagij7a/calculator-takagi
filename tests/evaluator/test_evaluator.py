@@ -20,14 +20,14 @@ class TestEvaluator:
         evaluator = Evaluator()
         assert evaluator.execute(input) == expected
 
-    # class Test_文字列の算術演算式の入力が不適切な場合に例外を送出する:
-    #     @pytest.mark.parametrize(
-    #         ["input", "expected"],
-    #         [
-    #             pytest.param("1 > 0", ValueError, id="comparison operator"),
-    #         ]
-    #     )
-    #     def test_使用不可能な演算子が含まれている場合に例外を発生させる(self, input, expected):
-    #         evaluator = Evaluator()
-    #         with pytest.raises(Exception, match=expected):
-    #             evaluator.evaluate(input)
+    class Test_文字列の算術演算式の入力が不適切な場合に例外を送出する:
+        @pytest.mark.parametrize(
+            ["input", "expected_exception", "expected_message"],
+            [
+                pytest.param("1 > 0", ValueError, "Invalid expression", id="comparison operator"),
+            ]
+        )
+        def test_使用不可能な演算子が含まれている場合に例外を発生させる(self, input, expected_exception, expected_message):
+            evaluator = Evaluator()
+            with pytest.raises(expected_exception, match=expected_message):
+                evaluator.execute(input)

@@ -1,7 +1,7 @@
 from fractions import Fraction
 
-from pyparsing import (Combine, Optional, Regex, Word, infixNotation, nums,
-                       oneOf, opAssoc)
+from pyparsing import (Combine, Optional, ParseException, Regex, Word,
+                       infixNotation, nums, oneOf, opAssoc)
 
 
 class Parser:
@@ -18,4 +18,7 @@ class Parser:
         ])
 
     def execute(self, expression):
-        return self.parser.parseString(expression)
+        try:
+            return self.parser.parseString(expression, parseAll=True)
+        except ParseException as pe:
+            raise ValueError(f"Invalid expression: {pe}")
