@@ -7,4 +7,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-CMD ["python", "calculator_cli"]
+CMD ["python", "-m", "calculator_cli.main"]
