@@ -32,6 +32,8 @@ class TestEvaluator:
                 pytest.param("1 +", ValueError, "Ends with operator", id="single operand and operator"),
                 pytest.param("1 + * 2", ValueError, "Other invalid expression", id="continuous operators"),
                 pytest.param("(1 + 2", ValueError, "Other invalid expression", id="unmatched parentheses"),
+                pytest.param("1 + 1000000001", ValueError, "Value out of allowed range", id="large number"),
+                pytest.param("1 + -1000000001", ValueError, "Value out of allowed range", id="small number"),
             ]
         )
         def test_文字列の算術演算式の入力が不適切な場合に例外を送出する(self, input, expected_exception, expected_message):
