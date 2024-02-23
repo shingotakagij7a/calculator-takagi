@@ -1,4 +1,4 @@
-from pyparsing import *
+from pyparsing import Literal, Word, ZeroOrMore, nums
 
 
 class Parser:
