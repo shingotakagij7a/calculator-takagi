@@ -4,18 +4,18 @@ build:
 	docker build -t myapp .
 
 run: build
-	docker run myapp
+	docker run --rm myapp python -m calculator_cli.main "$(ARGS)"
 
 lint: build
-	docker run myapp flake8 ./app
+	docker run --rm myapp flake8 ./calculator_cli
 
 format: build
-	docker run myapp black ./app
+	docker run --rm myapp black ./calculator_cli
 
 test: build
-	docker run myapp pytest -c tox.ini
+	docker run --rm myapp pytest -c tox.ini
 
 coverage: build
-	docker run myapp pytest -c tox.ini --cov=./app
+	docker run --rm myapp pytest -c tox.ini --cov=./calculator_cli
 
 before_commit: lint test
