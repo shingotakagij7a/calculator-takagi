@@ -1,10 +1,13 @@
+from fractions import Fraction
+
+
 class Operator:
     def __init__(self):
         self.operations = {
             '+': lambda left, right: left + right,
             '-': lambda left, right: left - right,
             '*': lambda left, right: left * right,
-            '/': lambda left, right: left / right,
+            '/': lambda left, right: Fraction(left, right),
         }
 
     def execute(self, op_symbol, left, right):
