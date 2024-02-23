@@ -1,6 +1,6 @@
 from fractions import Fraction
 
-from calculator_cli.operator.operator import Operator
+from calculator_cli.arithmetic_operator.operator import Operator
 from calculator_cli.parser.parser import Parser
 
 
