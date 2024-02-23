@@ -1,11 +1,17 @@
-from pyparsing import Literal, Word, ZeroOrMore, nums
+from pyparsing import (Combine, Optional, Word, infixNotation, nums, oneOf,
+                       opAssoc)
 
 
 class Parser:
     def __init__(self):
-        integer = Word(nums)
-        plus = Literal('+')
-        self.expr = integer + ZeroOrMore(plus + integer)
+        integer = Combine(Optional(oneOf("+ -")) + Word(nums)).setParseAction(lambda t: int(t[0]))
+        plus = oneOf('+ -')
+        mul = oneOf('* /')
 
-    def parse(self, text):
-        return self.expr.parseString(text)
+        self.parser = infixNotation(integer, [
+            (mul, 2, opAssoc.LEFT),
+            (plus, 2, opAssoc.LEFT),
+        ])
+
+    def execute(self, expression):
+        return self.parser.parseString(expression)
