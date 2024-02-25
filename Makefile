@@ -6,6 +6,9 @@ build:
 run: build
 	docker run --rm myapp python -m calculator_cli.main "$(ARGS)"
 
+run_interactive: build
+	docker run --rm -it myapp python -m calculator_cli.main --interactive
+
 lint: build
 	docker run --rm myapp flake8 ./calculator_cli
 
