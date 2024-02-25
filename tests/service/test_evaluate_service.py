@@ -3,7 +3,7 @@ import pytest
 from calculator_cli.service.evaluate_service import EvaluateService
 
 
-class TestEvaluator:
+class TestEvaluateService:
     class Test正常系:
         @pytest.mark.parametrize(
             ["input", "expected"],
