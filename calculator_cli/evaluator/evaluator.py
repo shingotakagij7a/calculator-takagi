@@ -42,5 +42,5 @@ class Evaluator:
     def _evaluate_polynomial_expression(self, parsed_expression):
         left = self._evaluate_parsed_expression(parsed_expression[self.FIRST_OPERAND_INDEX])
         op = parsed_expression[self.OPERATOR_INDEX]
-        right = self._evaluate_parsed_expression(parsed_expression[self.SECOND_OPERAND_INDEX])
+        right = self._evaluate_parsed_expression(parsed_expression[self.SECOND_OPERAND_INDEX:])
         return self.operator.execute(op, left, right)
