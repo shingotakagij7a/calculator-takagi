@@ -1,10 +1,10 @@
 from fractions import Fraction
 
-from calculator_cli.arithmetic_operator.operator import Operator
-from calculator_cli.parser.parser import Parser
+from calculator_cli.service.lib.operator import Operator
+from calculator_cli.service.lib.parser import Parser
 
 
-class Evaluator:
+class EvaluateService:
     SINGLE_OPERAND_LENGTH = 1
     FIRST_OPERAND_INDEX = 0
     OPERATOR_INDEX = 1

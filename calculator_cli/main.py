@@ -1,7 +1,8 @@
 import argparse
 import sys
 
-from calculator_cli.controller.controller import Controller
+from calculator_cli.controller.calculator_controller import \
+    CalculatorController
 from calculator_cli.view.calculator_view import CalculatorView
 
 
@@ -12,7 +13,7 @@ def main():
     parser.add_argument("expression", type=str, nargs="?", default="", help="Mathematical expression to evaluate")
     args = parser.parse_args()
 
-    controller = Controller()
+    controller = CalculatorController()
     view = CalculatorView(scale=args.scale)
 
     if args.interactive:

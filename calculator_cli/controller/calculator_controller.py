@@ -1,9 +1,9 @@
-from calculator_cli.evaluator.evaluator import Evaluator
+from calculator_cli.service.evaluate_service import EvaluateService
 
 
-class Controller:
+class CalculatorController:
     def __init__(self):
-        self.evaluator = Evaluator()
+        self.evaluator = EvaluateService()
 
     def evaluate_expression(self, expression):
         try:
