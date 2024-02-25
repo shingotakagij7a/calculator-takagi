@@ -1,9 +1,19 @@
+from fractions import Fraction
+
+
 class CalculatorView:
+    DEFAULT_SCALE = 0
+
     def __init__(self, scale=None):
         self.scale = scale
 
-    def format_result(self, result):
-        if self.scale is not None and isinstance(result, float):
+    def output_result(self, result):
+        if self.scale is not None:
             format_spec = f".{self.scale}f"
-            return format(result, format_spec)
-        return str(result)
+        else:
+            format_spec = f".{self.DEFAULT_SCALE}f"
+
+        if isinstance(result, Fraction):
+            result = float(result)
+
+        print(format(result, format_spec))
