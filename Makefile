@@ -30,4 +30,4 @@ test: build
 coverage: build
 	docker run --rm myapp pytest -c tox.ini --cov=./calculator_cli
 
-before_commit: lint test
+before_commit: lint format test

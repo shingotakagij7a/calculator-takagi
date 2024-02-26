@@ -1,4 +1,4 @@
-name: ci
+name: ci-lint-format
 
 on: [push]
 
@@ -19,11 +19,6 @@ jobs:
       - name: Lint with flake8
         run: |
           flake8 ./calculator_cli
-      - name: Test with pytest
+      - name: Format with black
         run: |
-          pytest -c ci.ini --cov=calculator_cli
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          slug: shingotakagij7a/calculator-takagi
+          black ./calculator_cli
