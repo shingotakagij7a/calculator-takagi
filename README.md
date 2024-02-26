@@ -1,70 +1,127 @@
-# calculator
+# Calculator
 
-このアプリケーションは、コーディング面接の課題のために開発されました。基本的な算術演算を行い、コマンドラインインターフェースを介してユーザーの入力に応じて計算結果を表示します。
+このアプリケーションは、コーディング面接の課題のために開発されたシンプルな計算機です。基本的な算術演算を行い、コマンドラインインターフェースを介してユーザーの入力に応じて計算結果を表示します。
 
-## セットアップ
+## Functionality
+
+- 基本的な算術演算（足し算、引き算、掛け算、割り算）
+- コマンドラインインターフェースを通じた式の入力と結果表示
+- 結果の小数点以下の桁数指定（スケールオプション）
+
+## For Users
+
+### Requirements
+
+動作確認済みの環境:
+
+- Python 3.8
+
+他は `requirements.txt` を参照してください。
+
+### Setup
 
 プロジェクトをローカルで実行するためには、以下の手順に従ってください。
 
-プロジェクトのクローンを作成します。
-
-```:bash
+```bash
 git clone https://github.com/your-username/calculator-takagi.git
 cd calculator-takagi
 ```
 
-Docker イメージをビルドします。
+必要なライブラリをインストールします。
 
-```:bash
-make build
+```bash
+pip install -r requirements.txt
 ```
 
-## 使用方法
+### Usage
 
-### アプリケーションの実行
+```bash
+python -m calculator_cli <expression> [--scale <scale>] [--interactive]
 
-アプリケーションを実行するには、以下のコマンドを使用します。
+positional arguments:
+  expression                Mathematical expression to evaluate
 
-```:bash
-make run
+optional arguments:
+  -h, --help                show this help message and exit
+  -i, --interactive         Run in interactive mode
+  -s SCALE, --scale SCALE   Scale for rounding the result
 ```
 
-### コードの静的解析（Lint）
+## For Developers
 
-コードの静的解析を行うには、以下のコマンドを使用します。
+### Requirements
 
-```:bash
+動作確認済みの環境:
+
+- Docker v20.10.16
+
+### Setup
+
+プロジェクトをローカルで実行するためには、以下の手順に従ってください。
+
+```bash
+git clone https://github.com/your-username/calculator-takagi.git
+cd calculator-takagi
+```
+
+### Usage
+
+#### 実行
+
+```bash
+# EXPR: 計算式
+# SCALE: 結果の小数点以下の桁数
+make run EXPR=<expression>
+make run_scale EXPR=<expression> SCALE=<scale>
+make run_interactive
+make run_interactive_scale SCALE=<scale>
+```
+
+#### コードの静的解析（Lint）
+
+```bash
 make lint
 ```
 
-### コードのフォーマット
+#### コードのフォーマット
 
-コードのフォーマットを行うには、以下のコマンドを使用します。
-
-```:bash
+```bash
 make format
 ```
 
-### テストの実行
+#### テストの実行
 
-テストを実行するには、以下のコマンドを使用します。
-
-```:bash
+```bash
 make test
 ```
 
-### カバレッジレポートの生成
+#### カバレッジレポートの生成
 
-テストカバレッジレポートを生成するには、以下のコマンドを使用します。
-
-```:bash
+```bash
 make coverage
 ```
 
-### コミット前のチェック
+#### コミット前のチェック
 
-コミット前にリントとテストを行うには、以下のコマンドを使用します。
+lint, format, test を実行します。
 
-```:bash
+```bash
 make before_commit
 ```
+
+`make before_commit` は、コミット前に実行するためのフックを設定することを推奨します。
+
+```bash
+git config --local core.hooksPath .githooks
+chmod +x .githooks/pre-commit
+```
+
+### アーキテクチャ
+
+このアプリケーションは、以下のコンポーネントで構築されています。
+
+- **Controller**: エントリーポイントからの指示を受け取り、他のコンポーネントを呼び出します。
+- **Service**: 算術演算のロジックを担当します。
+- **View**: ユーザーの指定したオプションに応じて表示を整形し、結果を返却します。
+
+アーキテクチャ図は `docs/architecture.drawio` にあります。

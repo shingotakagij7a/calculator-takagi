@@ -4,19 +4,19 @@ build:
 	docker build -t myapp .
 
 run: build
-	docker run --rm myapp python -m calculator_cli.main "$(EXPR)"
+	docker run --rm myapp python -m calculator_cli "$(EXPR)"
 
 run_scale: build
-	docker run --rm myapp python -m calculator_cli.main --scale "$(SCALE)" "$(EXPR)"
+	docker run --rm myapp python -m calculator_cli --scale "$(SCALE)" "$(EXPR)"
 
 run_interactive: build
-	docker run --rm -it myapp python -m calculator_cli.main --interactive
+	docker run --rm -it myapp python -m calculator_cli --interactive
 
 run_interactive_scale: build
-	docker run --rm -it myapp python -m calculator_cli.main --interactive --scale "$(SCALE)"
+	docker run --rm -it myapp python -m calculator_cli --interactive --scale "$(SCALE)"
 
 run_help: build
-	docker run --rm myapp python -m calculator_cli.main --help
+	docker run --rm myapp python -m calculator_cli --help
 
 lint: build
 	docker run --rm myapp flake8 ./calculator_cli
