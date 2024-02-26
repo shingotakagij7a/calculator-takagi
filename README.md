@@ -124,4 +124,4 @@ chmod +x .githooks/pre-commit
 - **Service**: 算術演算のロジックを担当します。
 - **View**: ユーザーの指定したオプションに応じて表示を整形し、結果を返却します。
 
-アーキテクチャ図は `docs/architecture.drawio` にあります。
+依存関係は [アーキテクチャ図](docs/architecture.drawio) を参照。
