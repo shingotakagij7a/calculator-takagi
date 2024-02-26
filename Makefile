@@ -15,6 +15,9 @@ run_interactive: build
 run_interactive_scale: build
 	docker run --rm -it myapp python -m calculator_cli.main --interactive --scale "$(SCALE)"
 
+run_help: build
+	docker run --rm myapp python -m calculator_cli.main --help
+
 lint: build
 	docker run --rm myapp flake8 ./calculator_cli
 
