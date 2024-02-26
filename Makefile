@@ -1,4 +1,4 @@
-.PHONY: build run test
+.PHONY: build run run_scale run_interactive run_interactive_scale run_help test lint format coverage before_commit
 
 build:
 	docker build -t myapp .
