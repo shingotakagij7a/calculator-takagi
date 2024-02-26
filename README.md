@@ -73,7 +73,7 @@ cd calculator-takagi
 
 ### Usage
 
-#### 実行
+#### Run
 
 ```bash
 # EXPR: 計算式
@@ -84,31 +84,31 @@ make run_interactive
 make run_interactive_scale SCALE=<scale>
 ```
 
-#### コードの静的解析（Lint）
+#### Static Lint
 
 ```bash
 make lint
 ```
 
-#### コードのフォーマット
+#### Format Code
 
 ```bash
 make format
 ```
 
-#### テストの実行
+#### Test
 
 ```bash
 make test
 ```
 
-#### カバレッジレポートの生成
+#### Output Coverage
 
 ```bash
 make coverage
 ```
 
-#### コミット前のチェック
+#### Before Commit Checks
 
 lint, format, test を実行します。
 
@@ -123,7 +123,7 @@ git config --local core.hooksPath .githooks
 chmod +x .githooks/pre-commit
 ```
 
-### アーキテクチャ
+### Architecture
 
 このアプリケーションは、以下のコンポーネントで構築されています。
 
@@ -132,3 +132,57 @@ chmod +x .githooks/pre-commit
 - **View**: ユーザーの指定したオプションに応じて表示を整形し、結果を返却します。
 
 依存関係は [アーキテクチャ図](docs/architecture.drawio) を参照。
+
+### Testing
+
+#### Unit Test Strategy
+
+テスト容易性の高い Service 層に対してはユニットテストを実装しています。
+Service 層以下のコンポーネント(CalculatorService, Parser, Operator)に関してはカバレッジが 100% になるようにテストを実装しています。
+
+```bash
+make coverage
+
+# Coverage Output on `0479c71` commit
+---------- coverage: platform linux, python 3.8.18-final-0 -----------
+Name                                                 Stmts   Miss  Cover
+------------------------------------------------------------------------
+calculator_cli/__init__.py                               0      0   100%
+calculator_cli/__main__.py                              32     32     0%
+calculator_cli/controller/__init__.py                    0      0   100%
+calculator_cli/controller/calculator_controller.py      11     11     0%
+calculator_cli/service/__init__.py                       0      0   100%
+calculator_cli/service/calculator_service.py            36      0   100%
+calculator_cli/service/lib/__init__.py                   0      0   100%
+calculator_cli/service/lib/operator.py                  12      0   100%
+calculator_cli/service/lib/parser.py                    33      0   100%
+calculator_cli/view/__init__.py                          0      0   100%
+calculator_cli/view/calculator_view.py                  12     12     0%
+------------------------------------------------------------------------
+TOTAL                                                  136     55    60%
+```
+
+#### Thought of Test Cases
+
+入出力に関して以下の観点の組み合わせでテストケースを決定しています。また、これらのテストケースに含まれない要求を満たすために確認が必要なテストケースは別途追加しています。
+
+- (入力)オペランド: 数字以外/定義域内の整数/定義域内の小数/定義域外の数値
+- (入力)オペレータ: 加算/減算/乗算/除算/複数の組み合わせ/不適切な算術記号
+- (入力)括弧の有無: 不適切な形式/有り/無し
+- (出力)計算結果: 定義域内の整数/定義域内の小数/定義域外の数値/ゼロ除算
+
+| 入力: オペランドの型 | 入力: 括弧の使用 | 入力: 算術記号               | 出力: 値の範囲 | テストケースの例  | 結果 |
+| -------------------- | ---------------- | ---------------------------- | -------------- | ----------------- | ---- |
+| 整数                 | なし             | 加算                         | 値域内         | "1 + 2"           | 成功 |
+| 整数                 | なし             | 減算                         | 値域内         | "1 - 2"           | 成功 |
+| 整数                 | なし             | 乗算                         | 値域内         | "2 \* 3"          | 成功 |
+| 整数                 | なし             | 除算                         | 値域内         | "10 / 2"          | 成功 |
+| 整数                 | あり、適切       | 複数の算術記号               | 値域内         | "(1 - 2) \* 3"    | 成功 |
+| 小数                 | なし             | 加算                         | 値域内         | "0.1 + 0.2"       | 成功 |
+| 小数                 | なし             | 乗算                         | 値域内         | "2.5 \* 4"        | 成功 |
+| 不正な文字列         | -                | -                            | -              | "a"               | 失敗 |
+| 整数                 | あり、不適切     | 任意の算術記号               | -              | "(1 + 2"          | 失敗 |
+| 整数                 | なし             | 不適切な算術記号（比較など） | -              | "1 > 0"           | 失敗 |
+| 整数                 | なし             | 除算                         | ゼロ除算       | "1 / 0"           | 失敗 |
+| 整数                 | なし             | 加算                         | 値域外         | "1 + 1000000001"  | 失敗 |
+| 整数                 | なし             | 減算                         | 値域外         | "1 + -1000000001" | 失敗 |
