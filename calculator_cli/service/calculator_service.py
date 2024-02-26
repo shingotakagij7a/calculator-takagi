@@ -1,10 +1,10 @@
 from fractions import Fraction
 
-from calculator_cli.arithmetic_operator.operator import Operator
-from calculator_cli.parser.parser import Parser
+from calculator_cli.service.lib.operator import Operator
+from calculator_cli.service.lib.parser import Parser
 
 
-class Evaluator:
+class CalculatorService:
     SINGLE_OPERAND_LENGTH = 1
     FIRST_OPERAND_INDEX = 0
     OPERATOR_INDEX = 1
@@ -16,7 +16,7 @@ class Evaluator:
         self.operator = Operator()
         self.parser = Parser()
 
-    def execute(self, expression):
+    def calculate(self, expression):
         parsed_expression = self.parser.execute(expression)
         result = self._evaluate_parsed_expression(parsed_expression)
         if result > self.OUTPUT_MAX_VALUE or result < self.OUTPUT_MIN_VALUE:
@@ -42,5 +42,5 @@ class Evaluator:
     def _evaluate_polynomial_expression(self, parsed_expression):
         left = self._evaluate_parsed_expression(parsed_expression[self.FIRST_OPERAND_INDEX])
         op = parsed_expression[self.OPERATOR_INDEX]
-        right = self._evaluate_parsed_expression(parsed_expression[self.SECOND_OPERAND_INDEX])
+        right = self._evaluate_parsed_expression(parsed_expression[self.SECOND_OPERAND_INDEX:])
         return self.operator.execute(op, left, right)

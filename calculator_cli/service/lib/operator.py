@@ -7,8 +7,14 @@ class Operator:
             '+': lambda left, right: left + right,
             '-': lambda left, right: left - right,
             '*': lambda left, right: left * right,
-            '/': lambda left, right: Fraction(left, right),
+            '/': self.divide,
         }
+
+    def divide(self, left, right):
+        try:
+            return Fraction(left, right)
+        except ZeroDivisionError:
+            raise ValueError("Division by zero")
 
     def execute(self, op_symbol, left, right):
         if op_symbol in self.operations:
