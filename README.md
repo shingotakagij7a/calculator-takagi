@@ -1,3 +1,6 @@
+[![ci](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml/badge.svg)](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml)
+
+
 # Calculator
 
 このアプリケーションは、コーディング面接の課題のために開発されたシンプルな計算機です。基本的な算術演算を行い、コマンドラインインターフェースを介してユーザーの入力に応じて計算結果を表示します。
