@@ -10,13 +10,12 @@ INTERACTIVE_MODE_MESSAGE = "Entering interactive mode. Type 'exit' to exit."
 NO_EXPRESSION_MESSAGE = "No expression provided. Enter an expression to evaluate."
 
 
-def evaluate_and_display(expression, controller, view):
+def evaluate_and_display(expression, controller):
     if not expression:
         print(NO_EXPRESSION_MESSAGE)
         return
     try:
-        result = controller.evaluate_expression(expression)
-        view.output_result(result)
+        controller.evaluate_and_display(expression)
     except Exception as e:
         print(f"Error: {e}")
 
@@ -28,8 +27,8 @@ def main():
     parser.add_argument("expression", type=str, nargs="?", default="", help="Mathematical expression to evaluate")
     args = parser.parse_args()
 
-    controller = CalculatorController()
     view = CalculatorView(scale=args.scale)
+    controller = CalculatorController(view)
 
     if args.interactive:
         print(INTERACTIVE_MODE_MESSAGE)
@@ -37,9 +36,9 @@ def main():
             expression = input(WAITING_FOR_EXPRESSION)
             if expression.lower() == EXIT_EXPRESSION:
                 break
-            evaluate_and_display(expression, controller, view)
+            evaluate_and_display(expression, controller)
     else:
-        evaluate_and_display(args.expression, controller, view)
+        evaluate_and_display(args.expression, controller)
 
 
 if __name__ == "__main__":
