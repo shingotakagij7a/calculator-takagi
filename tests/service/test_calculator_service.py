@@ -1,9 +1,9 @@
 import pytest
 
-from calculator_cli.service.evaluate_service import EvaluateService
+from calculator_cli.service.calculator_service import CalculatorService
 
 
-class TestEvaluateService:
+class TestCalculatorService:
     class Test正常系:
         @pytest.mark.parametrize(
             ["input", "expected"],
@@ -28,8 +28,8 @@ class TestEvaluateService:
             ]
         )
         def test_文字列の算術演算式の入力が適切な場合にその計算結果の数値を返す(self, input, expected):
-            evaluator = EvaluateService()
-            assert evaluator.execute(input) == expected
+            service = CalculatorService()
+            assert service.calculate(input) == expected
 
     class Test異常系_文字列の算術演算式の入力が不適切:
         @pytest.mark.parametrize(
@@ -46,9 +46,9 @@ class TestEvaluateService:
             ]
         )
         def test_文字列の算術演算式の入力が不適切な場合に例外を送出する(self, input, expected_exception, expected_message):
-            evaluator = EvaluateService()
+            service = CalculatorService()
             with pytest.raises(expected_exception, match=expected_message):
-                evaluator.execute(input)
+                service.calculate(input)
 
     class Test異常系_算術結果の出力が不適切:
         @pytest.mark.parametrize(
@@ -59,6 +59,6 @@ class TestEvaluateService:
             ]
         )
         def test_文字列の算術演算式の入力が不適切な場合に例外を送出する(self, input, expected_exception, expected_message):
-            evaluator = EvaluateService()
+            service = CalculatorService()
             with pytest.raises(expected_exception, match=expected_message):
-                evaluator.execute(input)
+                service.calculate(input)

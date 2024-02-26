@@ -4,7 +4,7 @@ from calculator_cli.service.lib.operator import Operator
 from calculator_cli.service.lib.parser import Parser
 
 
-class EvaluateService:
+class CalculatorService:
     SINGLE_OPERAND_LENGTH = 1
     FIRST_OPERAND_INDEX = 0
     OPERATOR_INDEX = 1
@@ -16,7 +16,7 @@ class EvaluateService:
         self.operator = Operator()
         self.parser = Parser()
 
-    def execute(self, expression):
+    def calculate(self, expression):
         parsed_expression = self.parser.execute(expression)
         result = self._evaluate_parsed_expression(parsed_expression)
         if result > self.OUTPUT_MAX_VALUE or result < self.OUTPUT_MIN_VALUE:
