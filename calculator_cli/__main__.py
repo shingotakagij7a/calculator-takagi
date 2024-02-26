@@ -39,7 +39,6 @@ def main():
                 break
             evaluate_and_display(expression, controller, view)
     else:
-        print(args.expression)
         evaluate_and_display(args.expression, controller, view)
 
 
