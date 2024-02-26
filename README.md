@@ -1,5 +1,5 @@
 [![ci](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml/badge.svg)](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml)
-<img src="https://img.shields.io/badge/-Python-F9DC3E.svg?logo=python&style=flat">
+<img src="https://img.shields.io/badge/-Python-ccc.svg?logo=python&style=flat">
 
 # Calculator
 
