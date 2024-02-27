@@ -2,7 +2,8 @@
 ![GitHub Issues or Pull Requests](https://img.shields.io/github/issues-pr/shingotakagij7a/calculator-takagi)
 ![GitHub top language](https://img.shields.io/github/languages/top/shingotakagij7a/calculator-takagi)
 ![GitHub repo size](https://img.shields.io/github/repo-size/shingotakagij7a/calculator-takagi)
-[![ci](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml/badge.svg)](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/ci.yml)
+[![test](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/test.yml/badge.svg)](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/test.yml)
+[![lint and format](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/lint-and-format.yml/badge.svg)](https://github.com/shingotakagij7a/calculator-takagi/actions/workflows/lint-and-format.yml)
 [![codecov](https://codecov.io/gh/shingotakagij7a/calculator-takagi/graph/badge.svg?token=42UWIQY2RI)](https://codecov.io/gh/shingotakagij7a/calculator-takagi)
 
 # Calculator
